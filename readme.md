@@ -1,11 +1,11 @@
-# Vanilla Bean
-> Draft v1.0.0
+# Vanilla Bean (name TBA)
+> Draft v1.0.0 (wip)
 
 ## What?
 Vanilla Bean is an opinionated collection of development structure guidelines for developing javascript applications using a frameworkless approach.
 
 ## Concepts
-1. Coding standards  
+1. [Coding standards](#1. Coding Standards)  
   1.1 Linting and Code Style  
   1.2 Pre-processing
 
@@ -118,3 +118,9 @@ project-root/
 │   │   ├── stores/
 │   │   ├── services/
 ```
+
+## 4. Examples
+### 4.1 Candy Store Example
+(wip)
+
+## (WIP)
