@@ -5,11 +5,11 @@
 Vanilla Bean is an opinionated collection of development structure guidelines for developing javascript applications using a frameworkless approach.
 
 ## Concepts
-1. [Coding standards](#1. Coding Standards)  
-  1.1 Linting and Code Style  
-  1.2 Pre-processing
+1. [Coding standards](#1-coding-standards)  
+  1.1 [Linting and Code Style](#11-linting-and-code-style)  
+  1.2 [Pre-processing](#12-pre-processing)
 
-2. Design Patterns  
+2. (Design Patterns)[#2-design-patterns]  
   2.1 Components  
   2.2 Services  
   2.3 Stores
