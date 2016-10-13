@@ -1,5 +1,5 @@
 # Vanilla Bean (name TBA)
-> Draft v1.1.0 (wip)
+> Draft v1.1.1 (wip)
 
 ## What?
 Vanilla Bean is an opinionated project structure guideline for developing frameworkless javascript applications.
@@ -9,13 +9,12 @@ Frameworks tend to be slow and their codebases can easily get messy if written b
 
 Some of us favor `vanilla`, since anyone with `js` experience can understand it without having to watch a "Hello World" tutorial. However, it can be daunting for companies to take over an existing codebase written this way, since the code is "undocumented" and "lacking community support".
 
-This document aims to change that.  
-An app written with `Vanilla Bean` structure can be understood just by looking at the source.
+An app written with `Vanilla Bean` structure can be understood just by looking at the source, and would look familiar to devs heavily invested in frameworks.
 
 TL;DR:  
 framework structure good, vanilla structure random spaghetti, `vanilla bean` structure yay!
 
-## Concepts
+## Contents
 1. [Coding standards](#1-coding-standards)  
   1.1 [Linting and Code Style](#11-linting-and-code-style)  
   1.2 [Pre-processing](#12-pre-processing)
@@ -31,11 +30,14 @@ framework structure good, vanilla structure random spaghetti, `vanilla bean` str
 4. [Examples](#4-examples)
 
 ## 1. Coding Standards
+Following a js standard is _non-essential_ to the outcome of a project, but it's good practice to be inline with your fellow developers.
+
 ### 1.1 Linting and Code Style
-Set up your project to use a linter, and select a standard that works for you.  
+Set up your project with a linter, and select a standard that works for you.  
 Some good examples of standards are:  
-- AirBnB
-- StandardJS
+
+- [AirBnB](https://github.com/airbnb/javascript)
+- [StandardJS](http://standardjs.com/rules.html)
 
 ### 1.2 Pre-processing
 Use a pre-processor to bundle your scripts and/or provide backwards compatibility.
@@ -71,9 +73,7 @@ gulp.task('js', () => {
 ```
 
 ## 2. Design Patterns
-Frameworks such as Angular and React all have clear and restricted structures of how the pieces of an app is put together. Building an app with `vanilla` should be no different. Continuously following a clear structure makes your app understandable and easily digested.
-
-Following these steps will help you design understandable apps.
+An app structured with `Vanilla Bean` uses three key concepts.
 
 ### 2.1 Components
 `Components` build up the DOM elements of your app. They can work standalone, alongside or within other elements, and use `services` and `stores` to behave and display data.
@@ -99,7 +99,7 @@ A `service` is a one-off instance that provides useful methods to the rest of yo
 
 Example:
 ```js
-const CandyAPIService = (function() {
+const CandyAPIService = (() => {
   var endpoint = development ? 'localhost/api' : 'http://api.com'
 
   function call(action, data = {}) {
@@ -131,7 +131,7 @@ A `store` is a `service` specifically designed to work as data-gateways between 
 
 Example:
 ```js
-const CandyStore = (function() {
+const CandyStore = (() => {
   var candies = []
 
   async function fetch() {
