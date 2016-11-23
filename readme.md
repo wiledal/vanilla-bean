@@ -9,10 +9,12 @@ Frameworks tend to be slow and their codebases can easily get messy if written b
 
 Some of us favor `vanilla`, since anyone with `js` experience can understand it without having to watch a "Hello World" tutorial. However, it can be daunting for companies to take over an existing codebase written this way, since the code is "undocumented" and "lacking community support".
 
-An app written with `Vanilla Bean` structure can be understood just by looking at the source, and would look familiar to devs heavily invested in frameworks.
+An app written with `Vanilla Bean` structure can be understood just by looking at the source, and would look familiar to devs invested in frameworks.
+
+`Vanilla Bean` is very abstract and applies constraints only so that you don't have to think twice about where to put your code.
 
 TL;DR:  
-framework structure good, vanilla structure random spaghetti, `vanilla bean` structure yay!
+framework structure good, vanilla structure (possibly) random spaghetti, `vanilla bean` structure good!
 
 ## Contents
 1. [Coding standards](#1-coding-standards)  
@@ -22,12 +24,15 @@ framework structure good, vanilla structure random spaghetti, `vanilla bean` str
 2. [Design Patterns](#2-design-patterns)  
   2.1 [Components](#21-components)  
   2.2 [Services](#22-services)  
-  2.3 [Stores](#23-stores)
+  2.3 [Stores](#23-stores)  
 
 3. [Project Structure](#3-project-structure)  
   3.1 [Folder Overview](#31-folder-overview)
 
 4. [Examples](#4-examples)
+
+5. [How do I X?](#5-how-do-i-x) (common scenarios)  
+  5.1 Component communication
 
 ## 1. Coding Standards
 Following a js standard is _non-essential_ to the outcome of a project, but it's good practice to be inline with your fellow developers.
@@ -78,14 +83,14 @@ An app structured with `Vanilla Bean` uses three key concepts.
 ### 2.1 Components
 `Components` build up the DOM elements of your app. They can work standalone, alongside or within other elements, and use `services` and `stores` to behave and display data.
 
-Example (in `CustomElements` style):  
+Example (in [CustomElements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements/Custom_Elements_with_Classes) style):  
 ```js
 class CandyGrid extends HTMLElement {
-  attachedCallback() {
+  attachedCallback () {
     this.classList.add('loading')
-    CandyStore.fetch().then(() => {
+    CandyStore.fetch().then((data) => {
       this.classList.remove('loading')
-      // draw grid of candies
+      // Draw grid of candies
     })
   }
 }
@@ -99,12 +104,12 @@ A `service` is a one-off instance that provides useful methods to the rest of yo
 
 Example:
 ```js
-const CandyAPIService = (() => {
-  var endpoint = development ? 'localhost/api' : 'http://api.com'
+var CandyAPIService = (() => {
+  var endpoint = 'https://example.com/api'
 
-  function call(action, data = {}) {
+  function call (data = {}) {
     return new Promise((resolve, reject) => {
-      fetch(`${endpoint}${action}`, {
+      fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json'
@@ -131,20 +136,25 @@ A `store` is a `service` specifically designed to work as data-gateways between 
 
 Example:
 ```js
-const CandyStore = (() => {
+var CandyStore = (() => {
   var candies = []
 
-  async function fetch() {
+  formatData (data) {
+    // Transform the data
+    return data
+  }
+
+  function fetch () {
     return new Promise((resolve, reject) => {
       CandyAPIService.call('/candies').then((data) => {
-        candies = data.candies
-        resolve(data)
+        candies = transformData(data.candies)
+        resolve(candies)
       })
     })
   }
 
-  function getByID(id) {
-    return candies.filter( (entry) => entry.id === id )[0]
+  function getByID (id) {
+    return candies.filter( entry => entry.id === id )[0]
   }
 
   return {
@@ -165,12 +175,19 @@ project-root/
 │   │   ├── app.js
 │   │   ├── vendor/
 │   │   ├── components/
-│   │   ├── stores/
 │   │   ├── services/
+│   │   ├── stores/
 ```
 
 ## 4. Examples
 ### 4.1 Candy Store Example
 (wip)
+
+## 5. How do I X? (common scenarios)
+### 5.1 Component communication
+Your components need to talk to each other. There are many ways of achieving this using:
+- Event firing and listening
+- Direct method calling
+- Service middleman
 
 ## (WIP)
