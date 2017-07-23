@@ -7,7 +7,7 @@ Vanilla Bean is an opinionated project structure guideline for developing framew
 ## Why?
 Frameworks tend to be slow and the codebases made with them can get messy even if you have good intentions. They often take weeks to learn and can take many months, if not years to fully understand.
 
-Some of us favor `vanilla`, since anyone with `js` experience can understand it without having to watch 12-part tutorial. However, it can be daunting for companies to take over an existing codebase written this way, since the code is "undocumented" and "lacking community support".
+Some of us favor `vanilla`, since anyone with `js` experience should be able to understand it without having to watch 12-part tutorial. However, it can be daunting for companies to take over an existing codebase written this way, since the code is "undocumented" and "lacking community support".
 
 An app written with `Vanilla Bean` structure can be understood just by looking at the source, and would look familiar to devs invested in frameworks.
 
